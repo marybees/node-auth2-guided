@@ -2,7 +2,7 @@ const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const router = require("express").Router();
-const config = require("");
+const config = require("../api/config");
 
 const Users = require("../users/users-model.js");
 const { isValid } = require("../users/users-service.js");
@@ -66,14 +66,13 @@ function getJwt(user) {
     role: user.role,
   };
 
-  const jwtSecret = "is it secret? is it safe?"
+  const jwtSecret = "is it secret? is it safe?";
 
   const jwtOptions = {
     expiresIn: "8h",
+  };
 
-  }
-
-  return jwt.sign(payload, jwtSecret, jwtOptions);
+  return jwt.sign(payload, config.jwtSecret, jwtOptions);
 }
 
 module.exports = router;
